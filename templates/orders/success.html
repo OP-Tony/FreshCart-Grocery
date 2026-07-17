@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Order Placed - FreshCart{% endblock %}
+{% block content %}
+<section class="narrow-panel">
+    <h1>Order Placed</h1>
+    <p>Your order #{{ order.id }} has been created successfully.</p>
+    <p>Status: <strong>{{ order.get_status_display }}</strong></p>
+    <p>Total: <strong>Rs. {{ order.total_amount }}</strong></p>
+    <a class="primary-btn" href="{% url 'orders:my_orders' %}">View My Orders</a>
+</section>
+{% endblock %}

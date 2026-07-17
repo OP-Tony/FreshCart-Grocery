@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Cart - FreshCart{% endblock %}
+{% block content %}
+<section class="section-heading">
+    <h1>Your Cart</h1>
+    <a href="{% url 'catalog:product_list' %}">Continue shopping</a>
+</section>
+
+{% if items %}
+    <section class="table-panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>Rs. {{ item.product.price }}</td>
+                        <td>
+                            <form method="post" action="{% url 'cart:update' item.id %}" class="table-form">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" min="1" max="{{ item.product.stock_quantity }}" value="{{ item.quantity }}">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                        <td>Rs. {{ item.line_total }}</td>
+                        <td><a href="{% url 'cart:remove' item.id %}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="summary">
+            <strong>Cart Total: Rs. {{ total }}</strong>
+            <a class="primary-btn" href="{% url 'orders:checkout' %}">Checkout</a>
+        </div>
+    </section>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

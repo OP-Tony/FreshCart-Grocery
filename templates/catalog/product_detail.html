@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} - FreshCart{% endblock %}
+{% block content %}
+<section class="detail">
+    <div class="detail-image">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <span>{{ product.category.name }}</span>
+        {% endif %}
+    </div>
+    <div class="detail-copy">
+        <p class="category">{{ product.category.name }}</p>
+        <h1>{{ product.name }}</h1>
+        <p class="price large">Rs. {{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        <p class="stock">{% if product.in_stock %}{{ product.stock_quantity }} units available{% else %}Out of stock{% endif %}</p>
+        <form method="post" action="{% url 'cart:add' product.id %}" class="quantity-form">
+            {% csrf_token %}
+            <label for="quantity">Quantity</label>
+            <input id="quantity" type="number" name="quantity" min="1" max="{{ product.stock_quantity }}" value="1">
+            <button class="primary-btn" type="submit" {% if not product.in_stock %}disabled{% endif %}>Add to Cart</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
