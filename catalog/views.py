@@ -4,6 +4,10 @@ from django.shortcuts import get_object_or_404, render
 from .models import Category, Product
 
 
+def landing_page(request):
+    return render(request, "catalog/landing.html")
+
+
 def product_list(request, category_slug=None):
     categories = Category.objects.all()
     category = None

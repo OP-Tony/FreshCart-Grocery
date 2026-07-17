@@ -10,7 +10,7 @@ django.setup()
 client = Client()
 routes = [
     ("/", 200, "FreshCart Grocery"),
-    ("/?q=milk", 200, "Milk 1L"),
+    ("/products/?q=milk", 200, "Milk 1L"),
     ("/accounts/login/", 200, "Login"),
     ("/admin/", 302, "/admin/login/"),
 ]
