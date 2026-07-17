@@ -14,14 +14,14 @@ Based on the project's [Problem Statement](file:///C:/Users/TONY/Downloads/UpSki
 
 - Python 3.13
 - Django 5.2
-- SQLite for free PythonAnywhere deployment
+- SQLite (default database)
 - Optional MySQL for local development
 - Django templates and CSS
 
 ## Local Setup
 
 ```powershell
-cd "C:\Users\TONY\Downloads\Unstop-project\Grocery Store"
+cd "C:\Users\TONY\Downloads\UpSkill-project\Grocery Store"
 .venv\Scripts\python.exe manage.py migrate
 .venv\Scripts\python.exe manage.py seed_demo
 .venv\Scripts\python.exe manage.py runserver
@@ -54,30 +54,3 @@ Create the database in MySQL, then run migrations:
 .venv\Scripts\python.exe manage.py seed_demo
 ```
 
-## Free PythonAnywhere Deployment
-
-Use the free Beginner account and deploy with SQLite.
-
-1. Push this folder to a free GitHub repository.
-2. Create a PythonAnywhere free account.
-3. Clone the repository in a PythonAnywhere Bash console.
-4. Create a virtualenv and install requirements.
-5. Run migrations and seed data.
-6. Configure the WSGI file to point to `grocery_store.settings`.
-7. Configure static files:
-   - URL: `/static/`
-   - Path: `/home/yourusername/project/staticfiles`
-8. Run `python manage.py collectstatic`.
-9. Reload the web app.
-
-Final URL format: `https://yourusername.pythonanywhere.com`.
-
-## Docker
-
-Docker is optional for sharing the full local MySQL setup:
-
-```powershell
-docker compose up --build
-```
-
-Then run migrations inside the web container.
